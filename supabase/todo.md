@@ -1,0 +1,3 @@
+- [ ] use [shadcn](https://ui.shadcn.com/) for components / design system
+- [ ] use css variables for consistent style
+- [ ] supabase realtime for reactivity?

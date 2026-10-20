@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #fafafa;
+  --background2: #fff;
+  --border: #e4e4e4;
+  --elevated: #f2f2f2;
+  --text: #1a1a1a;
+  --text2: #6e6e6e;
+  --primary: #0969da;
+  --selection: #eee;
+  --shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #151515;
+    --background2: #1e1e1e;
+    --border: #464646;
+    --elevated: #2f2f2f;
+    --text: #e2e2e2;
+    --text2: #b2b2b2;
+    --selection: #3d3d3d;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--background2);
+  --color-border: var(--border);
+  --color-elevated: var(--elevated);
+  --color-foreground: var(--text);
+  --color-muted: var(--text2);
+  --color-primary: var(--primary);
+  --shadow-card: var(--shadow);
+  --font-sans: var(--font-inter);
+  --radius-lg: 6px;
+  --radius-xl: 12px;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
   }
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+}
+
+::selection {
+  background: var(--selection);
+}
+
+/* glossy primary button: light-to-dark gradient, darker edge, inner highlight */
+@utility btn-primary {
+  color: white;
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--primary), white 20%),
+    var(--primary)
+  );
+  border: 1px solid color-mix(in srgb, var(--primary), black 30%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    inset 0 -1px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px rgb(0 0 0 / 0.2);
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 0.25);
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+
+  &:active {
+    filter: brightness(0.95);
+    box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.25);
+  }
 }
